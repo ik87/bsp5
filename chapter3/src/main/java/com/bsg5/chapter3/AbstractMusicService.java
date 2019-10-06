@@ -3,10 +3,7 @@ package com.bsg5.chapter3;
 import com.bsg5.chapter3.model.Artist;
 import com.bsg5.chapter3.model.Song;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -42,6 +39,17 @@ public abstract class AbstractMusicService implements MusicService, Resettable {
     }
 
     @Override
+    public List<Song> getSongsForArtist(String artist) {
+        List<Song> songs = new ArrayList<>(
+                getArtist(artist)
+                        .getSongs()
+                        .values()
+        );
+        songs.sort(Song::compareTo);
+        return songs;
+    }
+
+    @Override
     public List<String> getMatchingSongNamesForArtist(String artist, String prefix) {
         String normalizedPrefix = transformSong(prefix)
                 .toLowerCase();
@@ -63,7 +71,7 @@ public abstract class AbstractMusicService implements MusicService, Resettable {
                 .keySet()
                 .stream()
                 .map(this::transformArtist)
-                .filter(name -> name.toLowerCase().startsWith(prefix))
+                .filter(name -> name.toLowerCase().startsWith(normalizedPrefix))
                 .sorted(Comparator.comparing(Function.identity()))
                 .collect(Collectors.toList());
     }
@@ -74,4 +82,5 @@ public abstract class AbstractMusicService implements MusicService, Resettable {
         song.setVotes(song.getVotes() + 1);
         return song;
     }
+
 }

@@ -55,6 +55,10 @@ public class Song implements Comparable<Song> {
 
     @Override
     public int compareTo(Song o) {
-        return 0;
+        int value = Integer.compare(o.getVotes(), getVotes());
+        if(value == 0) {
+            value = getName().compareTo(o.getName());
+        }
+        return  value;
     }
 }
