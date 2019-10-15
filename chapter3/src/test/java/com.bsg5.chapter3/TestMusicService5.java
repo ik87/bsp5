@@ -1,14 +1,12 @@
 package com.bsg5.chapter3;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
-@ContextConfiguration(locations = "/config-04.xml")
-public class TestMusicService4 extends AbstractTestNGSpringContextTests {
-    @Qualifier("musicService4")
+@ContextConfiguration(locations = {"/config-05.xml", "/musicservicetest.xml"})
+public class TestMusicService5 extends AbstractTestNGSpringContextTests {
     @Autowired
     MusicService service;
 
@@ -21,7 +19,7 @@ public class TestMusicService4 extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testGetMatchingArtistNames() {
+    public void testGetMatchingArtistName() {
         tests.testMatchingArtistNames(service);
     }
 
@@ -31,7 +29,7 @@ public class TestMusicService4 extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testMatchingSongNamesForArtist() {
+    public void testMatchingSongNameArtist() {
         tests.testMatchingSongNamesForArtist(service);
     }
 }

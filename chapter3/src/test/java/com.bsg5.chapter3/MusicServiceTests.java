@@ -1,6 +1,7 @@
 package com.bsg5.chapter3;
 
 import com.bsg5.chapter3.model.Song;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.function.Consumer;

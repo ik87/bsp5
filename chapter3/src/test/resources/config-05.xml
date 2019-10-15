@@ -6,6 +6,10 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
-
-    <context:component-scan  base-package="com.bsg5.chapter3.mem03" resource-pattern="*Normalizer.class"/>
+    <import resource="normalizers-na.xml"/>
+    <bean name="musicService" class="com.bsg5.chapter3.mem03.MusicService3">
+        <property name="artistNormalizer" ref="foo"/>
+        <property name="songNormalizer" ref="bar"/>
+    </bean>
 </beans>
+
